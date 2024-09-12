@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom"
 import Header from "../Header"
 import Footer from "../Footer"
 
-const Homepage = () => {
+const LayoutWebsite = () => {
   return (
     <div>
       <Header/>
@@ -12,4 +12,4 @@ const Homepage = () => {
   )
 }
 
-export default Homepage
+export default LayoutWebsite

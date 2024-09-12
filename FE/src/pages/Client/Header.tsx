@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 import { Dropdown, Space } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const historyItems = [
     {
@@ -65,11 +65,11 @@ const userItems = [
         key: "4",
         label: (
             <div className="flex justify-center items-center py-5">
-                <a href="">
+                <Link to={`/login`}>
                     <button className="bg-pink-500 px-12 rounded-xl text-white py-3 hover:bg-pink-600 focus:outline-none focus:ring-0">
                         Đăng nhập
                     </button>
-                </a>
+                </Link>
             </div>
         ),
     },
@@ -93,14 +93,16 @@ const Header = () => {
         setShowSearch(false);
     };
     return (
-        <div className="bg-black flex h-20 items-center px-5 justify-between">
+        <header className="bg-black flex h-20 items-center px-5 justify-between">
             {/*============== Logo & Search ========= */}
             <div className="logo flex items-center">
-                <img
+            <Link to={`/`}>
+               <img
                     className="w-40 max-[660px]:hidden object-cover"
                     src="/src/assets/logoMovies-removebg-preview.png"
                     alt="Logo"
                 />
+                </Link>
                 <div className="relative lg:w-[480px] md:w-[320px] max-[856px]:hidden ml-4">
                     <input
                         type="text"
@@ -175,7 +177,7 @@ const Header = () => {
                                 `relative ${isActive ? "text-orange-500" : "text-white"}`
                             }
                         >
-                            Hoạt hình
+                           Phim Hoạt hình
                         </NavLink>
                     </li>
                     <li>
@@ -264,7 +266,7 @@ const Header = () => {
                     </a>
                 </Dropdown>
             </div>
-        </div>
+        </header>
     );
 };
 
