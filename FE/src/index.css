@@ -2,4 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+.hidden {
+    display: none !important;
+  }
+#inputAdmin{
+  background-color: white !important;
+}
+#custom-input::placeholder {
+  color: gray !important;
+}
+#custom-button:hover{
+background-color: #ff2a14 !important;
+color: white !important;
+}
+input.ant-input {
+  background-color: #25252b !important;
+  border-color: transparent !important;
+  color: gray !important;
+}
 
+input.ant-input:focus {
+  background-color: #25252b !important;
+  border-color: #25252b !important;
+  color: gray !important;
+}
+
+input.ant-input:-webkit-autofill {
+  background-color: #25252b !important;
+  -webkit-box-shadow: 0 0 0 30px #25252b inset !important;
+  -webkit-text-fill-color: gray !important;
+}
+
+input.ant-input:-webkit-autofill:focus {
+  background-color: #25252b !important;
+  -webkit-box-shadow: 0 0 0 30px #25252b inset !important;
+  -webkit-text-fill-color: gray !important;
+}
+
+
+  @media (max-width: 857px) {
+    .override-hidden {
+        display: block !important;
+    }
+  }
