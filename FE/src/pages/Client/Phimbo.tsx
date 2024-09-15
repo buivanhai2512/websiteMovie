@@ -8,6 +8,7 @@ function PhimBo() {
     <>
       <Banner />
       <div className="phim_le" style={{ backgroundColor: "#16161a" }}>
+        <section className="max-w-[1408px] m-auto">
         <div
           className="flex gap-10 justify-center pt-3"
           style={{ fontSize: "19px" }}
@@ -152,6 +153,7 @@ function PhimBo() {
             </div>
           </div>
         </div>
+        </section>
       </div>
     </>
   );
