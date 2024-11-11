@@ -1,15 +1,44 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Button, Form, Input, message } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 import { LoginFormValues } from "../LoginInterface";
+import { signup } from "@/services/Auth/Auth";
+import { AxiosError } from "axios";
 
 const Register = () => {
-  const onFinish = (values: LoginFormValues) => {
-    console.log("Received values of form: ", values);
+  const Navigate = useNavigate();
+  const onFinish = async (values: LoginFormValues) => {
+    try {
+      // Gọi hàm đăng ký và truyền dữ liệu từ form vào
+      const response = await signup({
+        name: values.username,
+        password: values.password,
+        confirmPassword: values.confirmPassword,
+        email: values.email,
+      });
+
+      if (response) {
+        message.success("Đăng ký thành công!");
+        Navigate(`/login`);
+        // Có thể điều hướng tới trang đăng nhập sau khi đăng ký thành công
+      }
+    } catch (error) {
+      // Kiểm tra xem có phải lỗi từ server không và hiển thị thông báo phù hợp
+      if (
+        error instanceof AxiosError &&
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        message.error(error.response.data.message);
+      } else {
+        message.error("Không thể đăng ký người dùng");
+      }
+    }
   };
 
   return (
-    <div className="bg-[#16161a] py-44">
+    <div className="bg-[#16161a] py-52">
       <Form
         name="register"
         className="px-5 xl:px-0"
@@ -25,7 +54,7 @@ const Register = () => {
           name="username"
           rules={[
             { required: true, message: "Vui lòng nhập tên của bạn !!" },
-            { min: 6, message: "Tên phải có ít nhất 6 ký tự !!" },
+            { min: 3, message: "Tên phải có ít nhất 3 ký tự !!" },
           ]}
         >
           <Input
@@ -38,6 +67,22 @@ const Register = () => {
             }}
             prefix={<UserOutlined />}
             placeholder="Nhập tên đăng nhập của bạn"
+          />
+        </Form.Item>
+        <Form.Item
+          name="email"
+          rules={[{ required: true, message: "Vui lòng nhập email của bạn!" }, { type: "email", message: "Email không hợp lệ!" }]}
+        >
+          <Input
+            id="custom-input"
+            style={{
+              backgroundColor: "#25252b",
+              color: "gray",
+              padding: "10px",
+              border: "none",
+            }}
+            prefix={<UserOutlined />}
+            placeholder="Nhập email của bạn"
           />
         </Form.Item>
 
@@ -115,9 +160,9 @@ const Register = () => {
                 Đăng nhập
               </Link>
               <span className=" mx-2 text-lg text-[#32323c]">|</span>
-                <Link to={`/`} className="text-white ml-2 text-lg">
+              <Link to={`/`} className="text-white ml-2 text-lg">
                 Quên Pass
-                </Link>
+              </Link>
             </div>
           </div>
         </Form.Item>

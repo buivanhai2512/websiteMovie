@@ -1,6 +1,71 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+* {
+  font-family: -apple-system-font, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", Arial, sans-serif;
+}
+
+.top-main {
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+}
+.top-1-1::before {
+  background: #fc4274;
+}
+.top-1-2::before {
+  background: #ff6b6b; 
+}
+.top-1-3::before {
+  background: #ffcc00; 
+}
+.top-1-4::before {
+  background: #4caf50;
+}
+.top-1-5::before {
+  background: #2196f3; 
+}
+.top-1-6::before {
+  background: #9c27b0; 
+}
+.top-1-7::before {
+  background: #e91e63; 
+}
+.top-1-8::before {
+  background: #673ab7;
+}
+.top-1-9::before {
+  background: #3f51b5; 
+}
+.top-1-10::before {
+  background: #ff5722; 
+}
+.top-main::before {
+  content: '';
+  height: 320%;
+  width: 180%;
+  border-radius: 8px;
+  transform: rotate(45deg);
+  position: absolute;
+  top: -53%;
+  right: 20%;
+  z-index: -1;
+}
+.text-list-num {
+  position: relative;
+  left: -15px;
+  color: white;
+  z-index: 1;
+  display: inline-block;
+  height: 20px;
+  width: 30px;
+  text-align: center;
+  line-height: 32px;
+  font-weight: 700;
+  font-style: italic;
+  margin: -16px -5px 0 0;
+  text-indent: 3px;
+}
 
 .hidden {
     display: none !important;
@@ -15,25 +80,73 @@
 background-color: #ff2a14 !important;
 color: white !important;
 }
-input.ant-input {
+.shadow{
+  --tw-shadow: 0 10px 30px -8px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+#custom-input{
   background-color: #25252b !important;
   border-color: transparent !important;
   color: gray !important;
 }
-
-input.ant-input:focus {
+#custom-input:focus {
   background-color: #25252b !important;
   border-color: #25252b !important;
   color: gray !important;
 }
+.add:hover{
+background-color: blue !important;
+color: white !important;
+}
+.delete:hover{
+  background-color: red !important;
+  color: white !important;
+}
+.edit:hover{
+   background-color: #ffd700 !important;
+  color: white !important;
+}
+.module-item-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, .28);
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in;
+  opacity: 0;
+}
+.item:hover .iconplay{
+  opacity: .88;
+  transform: scale(.9);
+}
+.item:hover .play{
+  background: rgba(0, 0, 0, .28);
+}
+.iconplay{
+  transition: all .3s ease-in;
+  transform: scale(.6);
 
-input.ant-input:-webkit-autofill {
+}
+.module-item-content {
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+  color: #000000; 
+}
+.item:hover .module-item-content {
+  transform: translateY(0);
+  background-color: #161626;
+  color: hsla(0, 0%, 100%, .6);
+  opacity: 1;
+}
+
+#custom-input:-webkit-autofill {
   background-color: #25252b !important;
   -webkit-box-shadow: 0 0 0 30px #25252b inset !important;
   -webkit-text-fill-color: gray !important;
 }
 
-input.ant-input:-webkit-autofill:focus {
+#custom-input:-webkit-autofill:focus {
   background-color: #25252b !important;
   -webkit-box-shadow: 0 0 0 30px #25252b inset !important;
   -webkit-text-fill-color: gray !important;
@@ -45,3 +158,18 @@ input.ant-input:-webkit-autofill:focus {
         display: block !important;
     }
   }
+/*  làm mất thanh scoll ở phần top 10 */
+@media (max-width: 899px) {
+  .scroll-box::-webkit-scrollbar {
+      display: none;
+  }
+  .menu-header::-webkit-scrollbar{
+    display: none;
+  }
+}
+.tag::-webkit-scrollbar{
+  display: none;
+
+}
+
+/*  làm mất thanh scoll ở phần top 10 */

@@ -1,14 +1,40 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
-import { Link } from "react-router-dom";
-import { LoginFormValues } from "../LoginInterface";
+import { Button, Form, Input, message } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { signin } from "@/services/Auth/Auth";
+import { AxiosError } from "axios";
 const Login = () => {
-  const onFinish = (values: LoginFormValues) => {
-    console.log("Received values of form: ", values);
-  };
+  const navigate = useNavigate(); // Dùng hook useNavigate để điều hướng sau khi đăng nhập thành công
+  const [loading, setLoading] = useState(false); // Quản lý trạng thái loading của button đăng nhập
 
+  const onFinish = async (values: { email: string; password: string }) => {
+    setLoading(true); // Bắt đầu loading
+    try {
+      const userData = await signin({ email: values.email, password: values.password });
+      console.log(userData);
+      // Nếu đăng nhập thành công, chuyển hướng tới trang dashboard hoặc trang chủ
+      navigate("/");
+    } catch (error) {
+      if (
+        error instanceof AxiosError &&
+        error.response &&
+        error.response.data &&
+        error.response.data.messages
+      ) {
+        // Hiển thị từng thông báo lỗi từ backend
+        error.response.data.messages.forEach((msg: string) => {
+          message.error(msg);
+        });
+      } else {
+        message.error("Không thể đăng ký người dùng");
+      }
+    } finally {
+      setLoading(false); // Kết thúc loading
+    }
+  };
   return (
-    <div className="bg-[#16161a] py-44">
+    <div className="bg-[#16161a] py-56">
       <Form
         name="login"
         className="px-5 xl:px-0"
@@ -20,7 +46,7 @@ const Login = () => {
           Đăng nhập tài khoản
         </h4>
         <Form.Item
-          name="username"
+          name="email"
           rules={[
             { required: true, message: "Vui lòng nhập Email của bạn !!" },
           ]}
@@ -62,6 +88,8 @@ const Login = () => {
             block
             className="bg-[#25252b] py-6 border-none"
             id="custom-button"
+            disabled={loading} 
+            loading={loading}
             htmlType="submit"
           >
             Đăng nhập ngay

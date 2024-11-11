@@ -1,10 +1,10 @@
-import 'antd/dist/reset.css';
-import Router from './router';
+import "antd/dist/reset.css";
+import Router from "./router";
+
 function App() {
-  
   return (
     <>
-    <Router/>
+      <Router />
     </>
   );
 }
